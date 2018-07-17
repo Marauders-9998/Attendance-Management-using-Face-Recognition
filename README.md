@@ -31,7 +31,6 @@ Windows users can download from [here](https://www.python.org/downloads/), Linux
  2. `pip install pillow`
  3. `pip install pyautogui`
  4. `pip install OpenCV-contrib-python`
- 5. `pip install e`
 
 ##  How to run the app
  - run the Attendance_app.py to launch the software
