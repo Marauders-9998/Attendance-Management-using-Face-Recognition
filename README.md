@@ -10,15 +10,22 @@ This python based app uses OpenCV libraries: face detection using Haar feature-b
 ## About the app
 The app has two main Panels: Students' and Manager's
 ![image description](https://lh3.googleusercontent.com/k8wLf41-IzIm5AiUo8G44IrBsLKKKtzKUqnoNiOGEo7KHox6ky9YpiaZbBplw0lLOYrHBiZLzMm8 "Welcome Page")
+<br/>
 Students' panel has one main feature in marking the attendance
 ![image description](https://lh3.googleusercontent.com/Sq2hEKvJoPdtKrsYNakuKoBOF10utSc6nLyiKfQnVCy9DWG511sLHcIAY9MjV-WVP4hP3Sz1cOTG "Student Panel Page")
+<br/>
 Manager's panel has various features in adding a new class, adding a student to logged-in class and training the recognizer
 ![image description](https://lh3.googleusercontent.com/BQoRZ4yOKuiclxaVxreUeHHcSkekon_klQFP7HFB0BRFSSgMSdr_uV9jPcpCfa0QhnYzzpnn-ukh "Create a New Batch")
 ![image description](https://lh3.googleusercontent.com/jbRvtzBtTERP3MTpYrekBSjHmib_YlhgH1sSCxUXVtBVB2rojEkMUHgs4r9DtFV6y5EKA3Z6T8OC "Manager Panel Page")
+<br/>
 Captured photo after marking attendance automatically gets added to training data images. If the app somehow fails to recognize a student, the Manager can manually mark a student's attendance in attendance register by looking at the images in unrecognized students directory.
+<br/>
 **Directory Structure:**
+<br/>
 ./extras - contains the attendance register of different classes and the file containing names of all classes
+<br/>
 ./images - contains the training data images and unrecognized student's directory
+<br/>
 ./student's list - contains the files containing the information of all students of a class
 
 ## Setup for the app
