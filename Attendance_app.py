@@ -448,6 +448,7 @@ class AddStudentPage(tk.Frame):
 			i=i-1
 		if i==0	:
 			messagebox.showinfo("Message","Training images added successfully!")
+		messagebox.showinfo('Enrollment Number', 'Roll Number of student: '+current_class+roll_no)
 		self.tv_name.delete(0, END)
 
 	def exit(self):
