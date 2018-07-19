@@ -3,7 +3,9 @@ import os
 import cv2
 import sys
 import excel
+import shlex
 import pyautogui
+import subprocess
 from capture import capture
 from capture import detect_faces
 from datetime import datetime
@@ -181,8 +183,7 @@ class StartPage(tk.Frame):
     def exit(self):
         self.controller.destroy()
         self.controller.quit()
-
-    
+            
 
 
 class StudentPanelPage(tk.Frame):
@@ -229,6 +230,8 @@ class ManagerPanelPage(tk.Frame):
         bt_train.pack()
         bt_addstud = tk.Button(self, text="Add a student to this class",width=30,command = self.addStudent)
         bt_addstud.pack()
+        bt_view_register = tk.Button(self, text="View Attendance Register",width=30,command = self.viewRegister)
+        bt_view_register.pack()
       
         bt_back = tk.Button(self, text="Back",width=30,
                            command=lambda: controller.show_frame("StartPage"))
@@ -236,6 +239,15 @@ class ManagerPanelPage(tk.Frame):
         bt_exit = tk.Button(self, text="Exit",width=30,
                            command=self.exit)
         bt_exit.pack()
+
+    def viewRegister(self):
+    	global current_class
+    	atten_register = os.path.join(os.getcwd(), 'extras', current_class, current_class+'.xlsx')
+    	try:
+    		opener = 'open' if sys.platform == 'darwin' else 'xdg-open'
+    		subprocess.call([opener, atten_register])
+    	except:
+    		os.startfile(atten_register)
 
 
     def addStudent(self):
