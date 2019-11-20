@@ -146,8 +146,8 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.bkg='#222629'
-        self.text_color='#65CCB8'
+        self.bkg = '#222629'
+        self.text_color = '#65CCB8'
         StartPage.config(self, bg=self.bkg)
 
         self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
@@ -208,21 +208,22 @@ class StudentPanelPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="Student Portal", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
+        self.bkg='#222629'
+        self.text_color='#65CCB8'
+        StudentPanelPage.config(self, bg=self.bkg)
 
-        self.lb_class_code=tk.Label(self,width=30).pack()
-        bt_mark = tk.Button(self, text="Mark my attendance",width=30,
-                           command = self.doWork)
-        bt_mark.pack()
+        label = tk.Label(self, width=25, text="Student Portal", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
+        label.place(x=90,y=40)
+        bt_mark=tk.Button(self, bg="#45056e", fg=self.text_color, text="Mark my\n ATTENDANCE",
+		                  width=16,height=7, font=("",18), command = self.doWork)
+        bt_mark.place(x=210,y=150)
 
-        bt_back = tk.Button(self, text="Back",width=10,
-                           command=lambda: controller.show_frame("StartPage"))
-        bt_back.pack()
-
-        bt_exit = tk.Button(self, text="Exit",width=10,
-                           command=self.exit)
-        bt_exit.pack()
+        bt_back = tk.Button(self, bg="#af0404",fg="yellow", text="Back",width=10,
+		                    command=lambda: controller.show_frame("StartPage"))
+        bt_back.place(x=110,y=500)
+        bt_exit = tk.Button(self, bg="#af0404",fg="yellow", text="Exit",width=10,
+		                    command=self.exit)
+        bt_exit.place(x=480,y=500)
 
     def doWork(self):
         global current_class_obj
