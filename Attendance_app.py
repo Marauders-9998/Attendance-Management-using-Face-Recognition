@@ -150,27 +150,27 @@ class StartPage(tk.Frame):
         self.text_color = '#65CCB8'
         StartPage.config(self, bg=self.bkg)
 
-        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
+        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
         self.label.place(x=90,y=40)
 
-        self.lb_class=tk.Label(self,text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_class.place(x=130,y=150)
-        self.tv_class=tk.Entry(self,width=30)
+        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        self.lb_class.place(x=130, y=150)
+        self.tv_class = tk.Entry(self, width=30)
         self.tv_class.focus()
-        self.tv_class.place(x=300,y=155)
+        self.tv_class.place(x=300, y=155)
 
-        self.lb_username= tk.Label(self,text="USERNAME : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        self.lb_username = tk.Label(self, text="USERNAME : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
         self.lb_username.place(x=130,y=200)
-        self.tv_username=tk.Entry(self,width=30)
+        self.tv_username = tk.Entry(self,width=30)
         self.tv_username.place(x=300,y=205)
 
-        self.lb_pass= tk.Label(self,text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_pass.place(x=130,y=250)
-        self.tv_pass=tk.Entry(self,show="*",width=30)
-        self.tv_pass.place(x=300,y=255)
-        self.showbtn=tk.Button(self, text="SHOW",bg="#ed3833",command=self.show)    #32ff6a
-        self.show=False
-        self.showbtn.place(x=555,y=253)
+        self.lb_pass = tk.Label(self, text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        self.lb_pass.place(x=130, y=250)
+        self.tv_pass = tk.Entry(self, show="*", width=30)
+        self.tv_pass.place(x=300, y=255)
+        self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
+        self.show = False
+        self.showbtn.place(x=555, y=253)
 
         self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to Student Portal", width=16,height=3, font=("",15),
                                  command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
@@ -178,7 +178,7 @@ class StartPage(tk.Frame):
                                  command=lambda: self.doWork("ManagerPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
         self.button1.place(x=100,y=350)
         self.button2.place(x=360,y=350)
-        self.bt_exit = tk.Button(self, bg="red",fg="yellow", text="Exit",width=10, command=self.exit)
+        self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit", width=10, command=self.exit)
         self.bt_exit.place(x=300,y=500)
 
     def show(self):
@@ -208,22 +208,22 @@ class StudentPanelPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.bkg='#222629'
-        self.text_color='#65CCB8'
+        self.bkg = '#222629'
+        self.text_color = '#65CCB8'
         StudentPanelPage.config(self, bg=self.bkg)
 
-        label = tk.Label(self, width=25, text="Student Portal", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
-        label.place(x=90,y=40)
-        bt_mark=tk.Button(self, bg="#45056e", fg=self.text_color, text="Mark my\n ATTENDANCE",
-		                  width=16,height=7, font=("",18), command = self.doWork)
-        bt_mark.place(x=210,y=150)
+        label = tk.Label(self, width=25, text="Student Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
+        label.place(x=90, y=40)
+        bt_mark = tk.Button(self, bg="#45056e", fg=self.text_color, text="Mark my\n ATTENDANCE",
+		                  width=16, height=7, font=("",18), command=self.doWork)
+        bt_mark.place(x=210, y=150)
 
-        bt_back = tk.Button(self, bg="#af0404",fg="yellow", text="Back",width=10,
+        bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back", width=10,
 		                    command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=110,y=500)
-        bt_exit = tk.Button(self, bg="#af0404",fg="yellow", text="Exit",width=10,
+        bt_back.place(x=110, y=500)
+        bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10,
 		                    command=self.exit)
-        bt_exit.place(x=480,y=500)
+        bt_exit.place(x=480, y=500)
 
     def doWork(self):
         global current_class_obj
@@ -239,13 +239,13 @@ class ManagerPanelPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.bkg='#222629'
-        self.text_color='#65CCB8'
+        self.bkg = '#222629'
+        self.text_color = '#65CCB8'
         ManagerPanelPage.config(self, bg=self.bkg)
         global current_class
 
-        label = tk.Label(self, width=25, text="Manager Portal", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
-        label.place(x=90,y=40)
+        label = tk.Label(self, width=25, text="Manager Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
+        label.place(x=90, y=40)
 
         bt_train = tk.Button(self, text="Train the\n Recogniser", bg="#45056e", fg=self.text_color,
                              width=15, height=5, font=("",15), command=self.doWork)
@@ -253,16 +253,16 @@ class ManagerPanelPage(tk.Frame):
         bt_addstud = tk.Button(self, text="Add a student\n to this class", bg="#3b0944",
                                width=15, fg=self.text_color, height=5, font=("",15), command=self.addStudent)
         bt_addstud.place(x=360, y=150)
-        bt_view_register = tk.Button(self, text="View\n Attendance Register",width=16,
-                                     bg="#581845",fg=self.text_color, height=5, font=("",15), command = self.viewRegister)
-        bt_view_register.place(x=240,y=320)
+        bt_view_register = tk.Button(self, text="View\n Attendance Register", width=16,
+                                     bg="#581845", fg=self.text_color, height=5, font=("",15),
+									 command = self.viewRegister)
+        bt_view_register.place(x=240, y=320)
 
-        bt_back = tk.Button(self, bg="#af0404",fg="yellow", text="Back",width=10,
+        bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back",width=10,
                             command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=110,y=500)
-
-        bt_exit = tk.Button(self, bg="#af0404",fg="yellow", text="Exit",width=10, command=self.exit)
-        bt_exit.place(x=505,y=500)
+        bt_back.place(x=110, y=500)
+        bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10, command=self.exit)
+        bt_exit.place(x=505, y=500)
 
     def viewRegister(self):
     	global current_class
@@ -305,31 +305,32 @@ class CreateNewBatchPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.bkg='#222629'
-        self.text_color='#65CCB8'
+        self.bkg = '#222629'
+        self.text_color = '#65CCB8'
         CreateNewBatchPage.config(self, bg=self.bkg)
 
-        self.label = tk.Label(self, width=25, text="Create a new Batch", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
-        self.label.place(x=90,y=40)
-        self.lb_class=tk.Label(self,text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_class.place(x=265,y=150)
-        self.tv_class=tk.Entry(self,width=30, justify='center')
+        self.label = tk.Label(self, width=25, text="Create a new Batch", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
+        self.label.place(x=90, y=40)
+		
+        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        self.lb_class.place(x=265, y=150)
+        self.tv_class = tk.Entry(self, width=30, justify='center')
         self.tv_class.focus()
-        self.tv_class.place(x=220,y=185)
+        self.tv_class.place(x=220, y=185)
 
-        self.lb_number= tk.Label(self,text="NUMBER OF STUDENTS: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_number.place(x=210,y=250)
+        self.lb_number = tk.Label(self, text="NUMBER OF STUDENTS: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        self.lb_number.place(x=210, y=250)
         vcmd = (self.controller.register(self.validate_number_field), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
-        self.tv_number=tk.Entry(self,width=30, justify='center', validate = 'key', validatecommand = vcmd)
-        self.tv_number.place(x=220,y=285)
+        self.tv_number = tk.Entry(self, width=30, justify='center', validate = 'key', validatecommand = vcmd)
+        self.tv_number.place(x=220, y=285)
 
-        bt_new_batch=tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD BATCH", width=16,height=2, font=("",15),
+        bt_new_batch = tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD BATCH", width=16, height=2, font=("",15),
                                command = self.create_new_batch)
-        bt_new_batch.place(x=225,y=370)
+        bt_new_batch.place(x=225, y=370)
 
-        bt_back = tk.Button(self, bg="#ed3833",fg="yellow", text="Back",width=10,
+        bt_back = tk.Button(self, bg="#ed3833", fg="yellow", text="Back", width=10,
                             command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=300,y=500)
+        bt_back.place(x=300, y=500)
 
     def validate_number_field(self, action, index, value_if_allowed, prior_value, text, validation_type, trigger_type, widget_name):
     	if text in '0123456789':
@@ -398,29 +399,29 @@ class AddStudentPage(tk.Frame):
 	def __init__(self, parent, controller):
 		tk.Frame.__init__(self, parent)
 		self.controller = controller
-		self.bkg='#222629'
-		self.text_color='#65CCB8'
+		self.bkg = '#222629'
+		self.text_color = '#65CCB8'
 		AddStudentPage.config(self, bg=self.bkg)
 
-		self.label = tk.Label(self, width=25, text="Add a new Student", bg=self.bkg, fg="#F8E9A1",font=("Times",30))
-		self.label.place(x=90,y=40)
+		self.label = tk.Label(self, width=25, text="Add a new Student", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
+		self.label.place(x=90, y=40)
 
-		self.lb_name=tk.Label(self,text="Name of Student: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-		self.lb_name.place(x=230,y=170)
-		self.tv_name=tk.Entry(self,width=30, justify='center', font=("",16))
+		self.lb_name = tk.Label(self, text="Name of Student: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+		self.lb_name.place(x=230, y=170)
+		self.tv_name = tk.Entry(self, width=30, justify='center', font=("",16))
 		self.tv_name.focus()
-		self.tv_name.place(x=135,y=205)
+		self.tv_name.place(x=135, y=205)
 
-		self.bt_addstud=tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD STUDENT",
-                             width=16,height=2, font=("",15), command = self.doWork)
-		self.bt_addstud.place(x=225,y=300)
+		self.bt_addstud = tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD STUDENT",
+                             width=16, height=2, font=("",15), command = self.doWork)
+		self.bt_addstud.place(x=225, y=300)
 
-		self.bt_back = tk.Button(self, bg="#af0404",fg="yellow", text="Back",width=10,
+		self.bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back", width=10,
                             command=lambda: controller.show_frame("ManagerPanelPage"))
-		self.bt_back.place(x=110,y=500)
-		self.bt_exit = tk.Button(self, bg="#af0404",fg="yellow", text="Exit",width=10,
+		self.bt_back.place(x=110, y=500)
+		self.bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10,
                             command=self.exit)
-		self.bt_exit.place(x=505,y=500)
+		self.bt_exit.place(x=505, y=500)
 
 	def doWork(self):
 		global current_class
