@@ -50,3 +50,25 @@ Windows users can download from [here](https://www.python.org/downloads/), Linux
  - the username is 'ADMIN' and password 'ubuntu'
  - use `SPACE` to click images wherever needed
  - you can add more images to the training data manually
+
+
+## Contribution
+
+ Your contributions are always welcome and appreciated. Following are the things you can do to contribute to this project.
+
+ 1. **Report a bug** <br>
+ If you think you have encountered an issue, and we should know about it, feel free to report it [here](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/issues/new) and we will take care of it.
+
+ 2. **Create a pull request** <br>
+It can't get better then this, your pull request will be appreciated by the community. You can get started by picking up any open issues from [here](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/issues) and make a pull request.
+ 
+|Label| Description |
+|--|--|
+| [good first issue](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/labels/good%20first%20issue) | Issues, good for newcomers |
+|[easy](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/labels/easy)|Issues with relatively **easy** difficulty|
+|[tkinter](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/labels/tkinter)|Issues related to [tkinter](https://docs.python.org/3/library/tk.html) functionalities|
+|[openCV](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/labels/openCV)|Issues related to [openCV](https://docs.opencv.org/master/) functionalities|
+|[Discussion](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/labels/Discussion)|Issues which demands throrough discussion with community|
+
+
+ > If you are new to open-source, make sure to check read more about it [here](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) and learn more about creating a pull request [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
