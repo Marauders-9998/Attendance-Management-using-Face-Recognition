@@ -1,6 +1,9 @@
 
 # [Attendance-Management-using-Face-Recognition](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition)
 
+
+[![Open Issues](https://img.shields.io/github/issues/Marauders-9998/Attendance-Management-using-Face-Recognition?style=for-the-badge&logo=github)](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/issues)  [![Forks](https://img.shields.io/github/forks/Marauders-9998/Attendance-Management-using-Face-Recognition?style=for-the-badge&logo=github)](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/network/members)  [![Stars](https://img.shields.io/github/stars/Marauders-9998/Attendance-Management-using-Face-Recognition?style=for-the-badge&logo=reverbnation)](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition/stargazers)   ![Made with Python](https://img.shields.io/badge/Made%20with-Python-blueviolet?style=for-the-badge&logo=python)   [![Slack](https://img.shields.io/badge/Slack-Chat-informational?style=for-the-badge&logo=slack)](https://join.slack.com/t/marauders9998/shared_invite/enQtODkwNTgxMTAxNTIwLTJhOWFhNzQwYjU3MTUwN2Y5NmZmN2VjMTc4NDA1MGRjZmIzNWEzZDU0ODZjNjE3NjkzNzk4ZmI1ZGFiOGE2NzQ)
+
 ## Objective
 This desktop application aims to simplify the process of Attendance Management of different classes and batches using Face Recognition and user-friendly GUI. The management of data and marking of attendance is carried out in Excel files.
 
