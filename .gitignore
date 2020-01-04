@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# JetBrains stuff
+.idea/
+
+# Application's (local) Data files
+extras/
+images/
+student's list/
