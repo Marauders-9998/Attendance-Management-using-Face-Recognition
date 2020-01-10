@@ -32,7 +32,9 @@ else:
 	current_class_obj = None
 	FaceTrainObj = None
 
-x, y = pyautogui.size()
+x1, y1 = pyautogui.size()
+x = int(0.40*x1)
+y = int(0.50*y1)
 
 class SampleApp(tk.Tk):
 
@@ -40,7 +42,7 @@ class SampleApp(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
-        geo = str(int(0.35*x))+'x'+str(int(0.50*y))
+        geo = str(x)+'x'+str(y)
         self.geometry(geo)
         self.resizable(False, False)
         self.title('Attendance Management App')
@@ -152,26 +154,26 @@ class StartPage(tk.Frame):
         StartPage.config(self, bg=self.bkg)
 
         self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-        self.label.place(x=x/21.34,y=y/27)
+        self.label.place(x=x*0.18,y=y*0.08)
 
         self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_class.place(x=x/14.77, y=y/7.2)
+        self.lb_class.place(x=x*0.235, y=y*0.280)
         self.tv_class = tk.Entry(self, width=30)
         self.tv_class.focus()
-        self.tv_class.place(x=x/6.4, y=y/7)
+        self.tv_class.place(x=x*0.45, y=y*0.285)
 
         self.lb_username = tk.Label(self, text="USERNAME : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
         self.lb_username.place(x=x/14.77,y=y/5.4)
         self.tv_username = tk.Entry(self,width=30)
         self.tv_username.place(x=x/6.4,y=y/5.27)
 
-        self.lb_pass = tk.Label(self, text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_pass.place(x=x/14.77, y=y/4.32)
-        self.tv_pass = tk.Entry(self, show="*", width=30)
-        self.tv_pass.place(x=x/6.4, y=y/4.24)
-        self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
-        self.show = False
-        self.showbtn.place(x=x/3.46, y=y/4.27)
+        #self.lb_pass = tk.Label(self, text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
+        #self.lb_pass.place(x=x/14.77, y=y/4.32)
+        #self.tv_pass = tk.Entry(self, show="*", width=30)
+        #self.tv_pass.place(x=x/6.4, y=y/4.24)
+        #self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
+        #self.show = False
+        #self.showbtn.place(x=x/3.46, y=y/4.27)
 
         self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to Student Portal", width=16,height=3, font=("",15),
                                  command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
