@@ -32,9 +32,20 @@ else:
 	current_class_obj = None
 	FaceTrainObj = None
 
+normal_width = 1920
+normal_height = 1080
 x1, y1 = pyautogui.size()
+percentage_width = x1 / (normal_width / 100)
+percentage_height = y1 / (normal_height / 100)
+scale_factor = ((percentage_width + percentage_height) / 2) / 100
+
 x = int(0.40*x1)
 y = int(0.50*y1)
+
+fontsize = int(30 * scale_factor)
+minimum_size = 20
+if fontsize < minimum_size:
+    fontsize = minimum_size
 
 class SampleApp(tk.Tk):
 
@@ -44,7 +55,7 @@ class SampleApp(tk.Tk):
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         geo = str(x)+'x'+str(y)
         self.geometry(geo)
-        self.resizable(False, False)
+        #self.resizable(False, False)
         self.title('Attendance Management App')
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         # the container is where we'll stack a bunch of frames
@@ -153,8 +164,8 @@ class StartPage(tk.Frame):
         self.text_color = '#65CCB8'
         StartPage.config(self, bg=self.bkg)
 
-        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-        self.label.place(x=x*0.18,y=y*0.08)
+        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times", fontsize))
+        self.label.place(x=130*scale_factor,y=40*scale_factor)
 
         self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
         self.lb_class.place(x=x*0.235, y=y*0.280)
