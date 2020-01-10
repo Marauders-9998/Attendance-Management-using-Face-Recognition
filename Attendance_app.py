@@ -32,6 +32,7 @@ else:
 	current_class_obj = None
 	FaceTrainObj = None
 
+"""Dynamic variables"""
 normal_width = 1920
 normal_height = 1080
 x1, y1 = pyautogui.size()
@@ -42,10 +43,15 @@ scale_factor = ((percentage_width + percentage_height) / 2) / 100
 x = int(0.40*x1)
 y = int(0.50*y1)
 
-fontsize = int(30 * scale_factor)
+title_fontsize = int(30 * scale_factor)
 minimum_size = 20
-if fontsize < minimum_size:
-    fontsize = minimum_size
+if title_fontsize < minimum_size:
+    title_fontsize = minimum_size
+
+text_fontsize = int(18 * scale_factor)
+minimum_textsize =  12
+if text_fontsize < minimum_textsize:
+    text_fontsize = minimum_textsize
 
 class SampleApp(tk.Tk):
 
@@ -164,36 +170,40 @@ class StartPage(tk.Frame):
         self.text_color = '#65CCB8'
         StartPage.config(self, bg=self.bkg)
 
-        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times", fontsize))
-        self.label.place(x=130*scale_factor,y=40*scale_factor)
+        entry_width = int(30 * scale_factor)
+        min_entrywidth =  25
+        if entry_width < min_entrywidth:
+            entry_width = min_entrywidth
+        self.label = tk.Label(self, width=25, text="Attendance Management", bg=self.bkg, fg="#F8E9A1", font=("Times", title_fontsize))
+        self.label.place(x=130 * scale_factor, y=40 * scale_factor)
 
-        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_class.place(x=x*0.235, y=y*0.280)
-        self.tv_class = tk.Entry(self, width=30)
+        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+        self.lb_class.place(x=170*scale_factor, y=155*scale_factor)
+        self.tv_class = tk.Entry(self, width=entry_width)
         self.tv_class.focus()
-        self.tv_class.place(x=x*0.45, y=y*0.285)
+        self.tv_class.place(x=340*scale_factor, y=160*scale_factor)
 
-        self.lb_username = tk.Label(self, text="USERNAME : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_username.place(x=x/14.77,y=y/5.4)
-        self.tv_username = tk.Entry(self,width=30)
-        self.tv_username.place(x=x/6.4,y=y/5.27)
+        self.lb_username = tk.Label(self, text="USERNAME : ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+        self.lb_username.place(x=183*scale_factor, y=210*scale_factor)
+        self.tv_username = tk.Entry(self, width=entry_width)
+        self.tv_username.place(x=340*scale_factor, y=215*scale_factor)
 
-        #self.lb_pass = tk.Label(self, text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        #self.lb_pass.place(x=x/14.77, y=y/4.32)
-        #self.tv_pass = tk.Entry(self, show="*", width=30)
-        #self.tv_pass.place(x=x/6.4, y=y/4.24)
-        #self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
-        #self.show = False
-        #self.showbtn.place(x=x/3.46, y=y/4.27)
+        self.lb_pass = tk.Label(self, text="PASSWORD : ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+        self.lb_pass.place(x=183*scale_factor, y=265*scale_factor)
+        self.tv_pass = tk.Entry(self, show="*", width=entry_width)
+        self.tv_pass.place(x=340*scale_factor, y=270*scale_factor)
+        self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
+        self.show = False
+        self.showbtn.place(x=600*scale_factor, y=265*scale_factor)
 
-        self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to Student Portal", width=16,height=3, font=("",15),
-                                 command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
-        self.button2 = tk.Button(self, bg="#5f1854", fg=self.text_color, text="Go to Manager Portal", width=16,height=3, font=("",15),
-                                 command=lambda: self.doWork("ManagerPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
-        self.button1.place(x=x/19.2,y=y/3.09)
-        self.button2.place(x=x/5.34,y=y/3.09)
-        self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit", width=10, command=self.exit)
-        self.bt_exit.place(x=x/6.4,y=y/2.16)
+        #self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to Student Portal", width=16,height=3, font=("",15),
+        #                         command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
+        #self.button2 = tk.Button(self, bg="#5f1854", fg=self.text_color, text="Go to Manager Portal", width=16,height=3, font=("",15),
+        #                         command=lambda: self.doWork("ManagerPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
+        #self.button1.place(x=x/19.2,y=y/3.09)
+        #self.button2.place(x=x/5.34,y=y/3.09)
+        #self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit", width=10, command=self.exit)
+        #self.bt_exit.place(x=x/6.4,y=y/2.16)
 
     def show(self):
         if self.show==False:
