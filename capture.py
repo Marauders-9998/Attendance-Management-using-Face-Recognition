@@ -1,7 +1,7 @@
 import os
-import cv2
 from datetime import datetime
 from tkinter import messagebox
+import cv2
 
 xml_file = os.path.join(os.getcwd(), 'haarcascade_frontalface_default.xml')
 
