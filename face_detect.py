@@ -1,6 +1,5 @@
 import os
 import cv2
-import sys
 from tkinter import messagebox
 
 class FaceDetect:

@@ -1,9 +1,7 @@
-import excel
 import os
 import cv2
 import sys
 import excel
-import shlex
 import pyautogui
 import subprocess
 from capture import capture
@@ -17,7 +15,6 @@ import tkinter as tk
 from tkinter import *
 from main_file import MainFile
 from tkinter import font as tkfont
-import face_train
 
 class_codes = ['Marauders']
 manager_id = 'ADMIN'

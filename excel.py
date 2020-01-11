@@ -2,7 +2,6 @@ from os import getcwd
 from os.path import join
 from calendar import monthrange
 from students_list import StudentsList
-from openpyxl.formula import Tokenizer
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 from datetime import datetime, date, timedelta
