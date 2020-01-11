@@ -2,8 +2,6 @@ import excel
 import os
 import cv2
 import sys
-import excel
-import shlex
 import pyautogui
 import subprocess
 from capture import capture
@@ -35,21 +33,19 @@ else:
 """Dynamic variables"""
 normal_width = 1920
 normal_height = 1080
-x1, y1 = pyautogui.size()
-percentage_width = x1 / (normal_width / 100)
-percentage_height = y1 / (normal_height / 100)
+x, y = pyautogui.size()
+x, y = 1280, 800   #1366, 768
+percentage_width = x / (normal_width / 100)
+percentage_height = y / (normal_height / 100)
 scale_factor = ((percentage_width + percentage_height) / 2) / 100
 
-x = int(0.40*x1)
-y = int(0.50*y1)
-
 title_fontsize = int(30 * scale_factor)
-minimum_size = 20
+minimum_size = 24
 if title_fontsize < minimum_size:
     title_fontsize = minimum_size
 
 text_fontsize = int(18 * scale_factor)
-minimum_textsize =  12
+minimum_textsize =  13
 if text_fontsize < minimum_textsize:
     text_fontsize = minimum_textsize
 
@@ -59,7 +55,7 @@ class SampleApp(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
-        geo = str(x)+'x'+str(y)
+        geo = str(int(0.43*x))+'x'+str(int(0.50*y))
         self.geometry(geo)
         #self.resizable(False, False)
         self.title('Attendance Management App')
@@ -192,18 +188,22 @@ class StartPage(tk.Frame):
         self.lb_pass.place(x=183*scale_factor, y=265*scale_factor)
         self.tv_pass = tk.Entry(self, show="*", width=entry_width)
         self.tv_pass.place(x=340*scale_factor, y=270*scale_factor)
-        self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show)    #32ff6a
+        self.showbtn = tk.Button(self, text="SHOW", bg="#ed3833", command=self.show, width=2, font=("", 8))    #32ff6a
         self.show = False
-        self.showbtn.place(x=600*scale_factor, y=265*scale_factor)
+        self.showbtn.place(x=(340 * scale_factor) + (entry_width * 9), y=270*scale_factor)
 
-        #self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to Student Portal", width=16,height=3, font=("",15),
-        #                         command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
-        #self.button2 = tk.Button(self, bg="#5f1854", fg=self.text_color, text="Go to Manager Portal", width=16,height=3, font=("",15),
-        #                         command=lambda: self.doWork("ManagerPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
-        #self.button1.place(x=x/19.2,y=y/3.09)
-        #self.button2.place(x=x/5.34,y=y/3.09)
-        #self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit", width=10, command=self.exit)
-        #self.bt_exit.place(x=x/6.4,y=y/2.16)
+        bt_width = int(16 * scale_factor)
+        min_width =  12
+        if bt_width < min_width:
+            bt_width = min_width
+        self.button1 = tk.Button(self, bg="#45056e", fg=self.text_color, text="Go to\nStudent Portal", width=bt_width, height=3, font=("",15),
+                                 command=lambda: self.doWork("StudentPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
+        self.button2 = tk.Button(self, bg="#5f1854", fg=self.text_color, text="Go to\nManager Portal", width=bt_width, height=3, font=("",15),
+                                 command=lambda: self.doWork("ManagerPanelPage",self.tv_class.get(),self.tv_username.get(),self.tv_pass.get()))
+        self.button1.place(x=140 * scale_factor, y=340 * scale_factor)
+        self.button2.place(x=410 * scale_factor, y=340 * scale_factor)
+        self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit", width=10, command=self.exit)
+        self.bt_exit.place(x=340 * scale_factor, y=490 * scale_factor)
 
     def show(self):
         if self.show==False:
@@ -236,18 +236,18 @@ class StudentPanelPage(tk.Frame):
         self.text_color = '#65CCB8'
         StudentPanelPage.config(self, bg=self.bkg)
 
-        label = tk.Label(self, width=25, text="Student Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-        label.place(x=x/21.34, y=y/27)
+        label = tk.Label(self, width=25, text="Student Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",title_fontsize))
+        label.place(x=130 *scale_factor, y=40 * scale_factor)
         bt_mark = tk.Button(self, bg="#45056e", fg=self.text_color, text="Mark my\n ATTENDANCE",
 		                  width=16, height=7, font=("",18), command=self.doWork)
-        bt_mark.place(x=x/9.14, y=y/7.2)
+        bt_mark.place(x=215 * scale_factor, y=150 * scale_factor)
 
         bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back", width=10,
 		                    command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=x/17.45, y=y/2.16)
+        bt_back.place(x=115 * scale_factor, y=485 * scale_factor)
         bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10,
 		                    command=self.exit)
-        bt_exit.place(x=x/4, y=y/2.16)
+        bt_exit.place(x=520 * scale_factor, y=485 * scale_factor)
 
     def doWork(self):
         global current_class_obj
@@ -268,25 +268,33 @@ class ManagerPanelPage(tk.Frame):
         ManagerPanelPage.config(self, bg=self.bkg)
         global current_class
 
-        label = tk.Label(self, width=25, text="Manager Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-        label.place(x=x/21.34, y=y/27)
+        label = tk.Label(self, width=25, text="Manager Portal", bg=self.bkg, fg="#F8E9A1", font=("Times",title_fontsize))
+        label.place(x=130 *scale_factor, y=40 * scale_factor)
 
+        bt_ht = int(5 * scale_factor)
+        min_ht =  3
+        if bt_ht < min_ht:
+            bt_ht = min_ht
+        bt_width = int(15 * scale_factor)
+        min_width =  12
+        if bt_width < min_width:
+            bt_width = min_width
         bt_train = tk.Button(self, text="Train the\n Recogniser", bg="#45056e", fg=self.text_color,
-                             width=15, height=5, font=("",15), command=self.doWork)
-        bt_train.place(x=x/17.45, y=y/7.2)
+                             width=bt_width, height=bt_ht, font=("",15), command=self.doWork)
+        bt_train.place(x=130 *scale_factor, y=160 * scale_factor)
         bt_addstud = tk.Button(self, text="Add a student\n to this class", bg="#3b0944",
-                               width=15, fg=self.text_color, height=5, font=("",15), command=self.addStudent)
-        bt_addstud.place(x=x/5.34, y=y/7.2)
-        bt_view_register = tk.Button(self, text="View\n Attendance Register", width=16,
-                                     bg="#581845", fg=self.text_color, height=5, font=("",15),
+                               width=bt_width, fg=self.text_color, height=bt_ht, font=("",15), command=self.addStudent)
+        bt_addstud.place(x=430 * scale_factor, y=160 * scale_factor)
+        bt_view_register = tk.Button(self, text="View\nAttendance\nRegister", width=bt_width,
+                                     bg="#581845", fg=self.text_color, height=bt_ht, font=("",15),
 									 command = self.viewRegister)
-        bt_view_register.place(x=x/8, y=y/3.38)
+        bt_view_register.place(x=265 * scale_factor, y=320 * scale_factor)
 
         bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back",width=10,
                             command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=x/17.45, y=y/2.16)
+        bt_back.place(x=115 * scale_factor, y=485 * scale_factor)
         bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10, command=self.exit)
-        bt_exit.place(x=x/3.80, y=y/2.16)
+        bt_exit.place(x=520 * scale_factor, y=485 * scale_factor)
 
     def viewRegister(self):
     	global current_class
@@ -333,28 +341,33 @@ class CreateNewBatchPage(tk.Frame):
         self.text_color = '#65CCB8'
         CreateNewBatchPage.config(self, bg=self.bkg)
 
-        self.label = tk.Label(self, width=25, text="Create a new Batch", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-        self.label.place(x=x/21.34, y=y/27)
+        self.label = tk.Label(self, width=25, text="Create a new Batch", bg=self.bkg, fg="#F8E9A1", font=("Times",title_fontsize))
+        self.label.place(x=130 *scale_factor, y=40 * scale_factor)
 
-        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_class.place(x=x/7.24, y=y/7.2)
-        self.tv_class = tk.Entry(self, width=30, justify='center')
+        entry_width = int(30 * scale_factor)
+        min_entrywidth =  23
+        if entry_width < min_entrywidth:
+            entry_width = min_entrywidth
+
+        self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+        self.lb_class.place(x=320 * scale_factor, y=140 * scale_factor)
+        self.tv_class = tk.Entry(self, width=entry_width, font=("",16), justify='center')
         self.tv_class.focus()
-        self.tv_class.place(x=x/8.73, y=y/5.84)
+        self.tv_class.place(x=190 * scale_factor, y=175 * scale_factor)
 
-        self.lb_number = tk.Label(self, text="NUMBER OF STUDENTS: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-        self.lb_number.place(x=x/9.14, y=y/4.32)
+        self.lb_number = tk.Label(self, text="NUMBER OF STUDENTS: ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+        self.lb_number.place(x=265 * scale_factor, y=240 * scale_factor)
         vcmd = (self.controller.register(self.validate_number_field), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
-        self.tv_number = tk.Entry(self, width=30, justify='center', validate = 'key', validatecommand = vcmd)
-        self.tv_number.place(x=x/8.73, y=y/3.79)
+        self.tv_number = tk.Entry(self, width=entry_width, font=("",16), justify='center', validate = 'key', validatecommand = vcmd)
+        self.tv_number.place(x=190 * scale_factor, y=275 * scale_factor)
 
         bt_new_batch = tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD BATCH", width=16, height=2, font=("",15),
                                command = self.create_new_batch)
-        bt_new_batch.place(x=x/8.54, y=y/2.92)
+        bt_new_batch.place(x=237 * scale_factor, y=350 * scale_factor)
 
         bt_back = tk.Button(self, bg="#ed3833", fg="yellow", text="Back", width=10,
                             command=lambda: controller.show_frame("StartPage"))
-        bt_back.place(x=x/6.4, y=y/2.16)
+        bt_back.place(x=340 * scale_factor, y=490 * scale_factor)
 
     def validate_number_field(self, action, index, value_if_allowed, prior_value, text, validation_type, trigger_type, widget_name):
     	if text in '0123456789':
@@ -427,25 +440,29 @@ class AddStudentPage(tk.Frame):
 		self.text_color = '#65CCB8'
 		AddStudentPage.config(self, bg=self.bkg)
 
-		self.label = tk.Label(self, width=25, text="Add a new Student", bg=self.bkg, fg="#F8E9A1", font=("Times",30))
-		self.label.place(x=x/21.34, y=y/27)
+		self.label = tk.Label(self, width=25, text="Add a new Student", bg=self.bkg, fg="#F8E9A1", font=("Times",title_fontsize))
+		self.label.place(x=130 *scale_factor, y=40 * scale_factor)
 
-		self.lb_name = tk.Label(self, text="Name of Student: ", bg=self.bkg, fg=self.text_color, font=("Courier",18))
-		self.lb_name.place(x=x/8.35, y=y/6.35)
-		self.tv_name = tk.Entry(self, width=30, justify='center', font=("",16))
+		self.lb_name = tk.Label(self, text="Name of Student: ", bg=self.bkg, fg=self.text_color, font=("Courier",text_fontsize))
+		self.lb_name.place(x=285 * scale_factor, y=175 * scale_factor)
+		entry_width = int(30 * scale_factor)
+		min_entrywidth =  23
+		if entry_width < min_entrywidth:
+			entry_width = min_entrywidth
+		self.tv_name = tk.Entry(self, width=entry_width, justify='center', font=("",16))
 		self.tv_name.focus()
-		self.tv_name.place(x=x/14.23, y=y/5.27)
+		self.tv_name.place(x=180 * scale_factor, y=210 * scale_factor)
 
 		self.bt_addstud = tk.Button(self, bg="#45056e", fg=self.text_color, text="ADD STUDENT",
                              width=16, height=2, font=("",15), command = self.doWork)
-		self.bt_addstud.place(x=x/8.54, y=y/3.6)
+		self.bt_addstud.place(x=245 * scale_factor, y=300 * scale_factor)
 
 		self.bt_back = tk.Button(self, bg="#af0404", fg="yellow", text="Back", width=10,
                             command=lambda: controller.show_frame("ManagerPanelPage"))
-		self.bt_back.place(x=x/17.45, y=y/2.16)
+		self.bt_back.place(x=115 * scale_factor, y=485 * scale_factor)
 		self.bt_exit = tk.Button(self, bg="#af0404", fg="yellow", text="Exit", width=10,
                             command=self.exit)
-		self.bt_exit.place(x=x/3.8, y=y/2.16)
+		self.bt_exit.place(x=520 * scale_factor, y=485 * scale_factor)
 
 	def doWork(self):
 		global current_class
