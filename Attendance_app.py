@@ -1,20 +1,21 @@
 import os
-import cv2
 import sys
-import excel
-import pyautogui
 import subprocess
-from capture import capture
-from capture import detect_faces
 from datetime import datetime
-from calendar import monthrange
-from openpyxl import Workbook, load_workbook
-from face_train import FaceTrain
-from students_list import StudentsList
 import tkinter as tk
 from tkinter import *
-from main_file import MainFile
 from tkinter import font as tkfont
+from calendar import monthrange
+
+import cv2
+import pyautogui
+from openpyxl import Workbook, load_workbook
+import excel
+from capture import capture
+from capture import detect_faces
+from face_train import FaceTrain
+from students_list import StudentsList
+from main_file import MainFile
 
 class_codes = ['Marauders']
 manager_id = 'ADMIN'
