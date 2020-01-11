@@ -1,44 +1,49 @@
 from os import getcwd
 from os.path import join
 from calendar import monthrange
-from students_list import StudentsList
+from datetime import datetime, date, timedelta
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
-from datetime import datetime, date, timedelta
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+from students_list import StudentsList
 
-heading_font = Font(size = 20, bold = True)
-alignment = Alignment(horizontal = 'center', vertical = 'center')
-fill_date = PatternFill(fgColor = 'AFA5EF', fill_type = 'solid')
-fill_roll = PatternFill(fgColor = 'A5EFAF', fill_type = 'solid')
-fill_name = PatternFill(fgColor = 'E9EFA5', fill_type = 'solid')
-fill_total = PatternFill(fgColor = '25F741', fill_type = 'solid')
-fill_absent = PatternFill(fgColor = 'FF1010', fill_type = 'solid')
-fill_present = PatternFill(fgColor = '10FF10', fill_type = 'solid')
+HEADING_FONT = Font(size=20, bold=True)
+ALIGNMENT = Alignment(horizontal='center', vertical='center')
+FILL_DATE = PatternFill(fgColor='AFA5EF', fill_type='solid')
+FILL_ROLL = PatternFill(fgColor='A5EFAF', fill_type='solid')
+FILL_NAME = PatternFill(fgColor='E9EFA5', fill_type='solid')
+FILL_TOTAL = PatternFill(fgColor='25F741', fill_type='solid')
+FILL_ABSENT = PatternFill(fgColor='FF1010', fill_type='solid')
+FILL_PRESENT = PatternFill(fgColor='10FF10', fill_type='solid')
 
-gap = 5
-date_column = 5
+GAP = 5
+DATE_COLUMN = 5
 
-names = ['Marauders']
-rolls = ['000001']
+NAMES = ['Marauders']
+ROLLS = ['000001']
 
-NUMBER_OF_STUDENTS = len(names)
+NUMBER_OF_STUDENTS = len(NAMES)
+
 
 def todays_date():
-	return datetime.now().date()
+    return datetime.now().date()
+
 
 def month():
-	return todays_date().strftime('%B')
+    return todays_date().strftime('%B')
+
 
 def make_file_name(class_name):
-	return join(getcwd(), 'extras', class_name, class_name+ '.xlsx')
+    return join(getcwd(), 'extras', class_name, class_name + '.xlsx')
+
 
 def current_month_exists(wb):
-	try:
-		ws = wb[month()]
-		return True
-	except:
-		return False
+    try:
+        ws = wb[month()]
+        return True
+    except:
+        return False
+
 
 def set_border(ws, cell_range):
     rows = ws[cell_range]
@@ -69,76 +74,78 @@ def set_border(ws, cell_range):
 
 
 def createWorksheet(wb):
-        #"creating register"
-        global names, rolls, NUMBER_OF_STUDENTS
-        manth = month()
-        ws = wb.create_sheet(manth)
-        ws.merge_cells('A1:AN2')
-        heading = 'Attendance Record for ' + manth
-        heading = heading + ' '*50 + heading + ' '*50 + heading
-        ws['A1'] = heading
-        ws['A1'].font = heading_font
-        ws['A1'].alignment = alignment
+    # "creating register"
+    global NAMES, ROLLS, NUMBER_OF_STUDENTS
+    manth = month()
+    ws = wb.create_sheet(manth)
+    ws.merge_cells('A1:AN2')
+    heading = 'Attendance Record for ' + manth
+    heading = heading + ' ' * 50 + heading + ' ' * 50 + heading
+    ws['A1'] = heading
+    ws['A1'].font = HEADING_FONT
+    ws['A1'].alignment = ALIGNMENT
 
-	#ws.sheet_properties.tabColor = 'FFFF66'
-        ws['A3'] = 'S.No'
-        ws['B3'] = 'Enrollment'
-        ws['B3'].fill = fill_roll
-        ws.merge_cells('C3:D3')
-        ws['C3'] = 'Name'
-        ws['C3'].fill = fill_name
+    # ws.sheet_properties.tabColor = 'FFFF66'
+    ws['A3'] = 'S.No'
+    ws['B3'] = 'Enrollment'
+    ws['B3'].fill = FILL_ROLL
+    ws.merge_cells('C3:D3')
+    ws['C3'] = 'Name'
+    ws['C3'].fill = FILL_NAME
 
-        cellrange = 'A'+str(gap-1)+':AN'+str(gap-1)
+    cellrange = 'A' + str(GAP - 1) + ':AN' + str(GAP - 1)
+    set_border(ws, cellrange)
+    for i in range(NUMBER_OF_STUDENTS):
+        ws.merge_cells(start_row=GAP + i, start_column=3, end_row=GAP + i, end_column=4)
+        ws.cell(row=GAP + i, column=1, value=str(i + 1))
+        ws.cell(row=GAP + i, column=2, value=ROLLS[i]).fill = FILL_ROLL
+        ws.cell(row=GAP + i, column=3, value=NAMES[i]).fill = FILL_NAME
+
+        cellrange = 'A' + str(GAP + i) + ':AN' + str(GAP + i)
         set_border(ws, cellrange)
-        for i in range(NUMBER_OF_STUDENTS):
-                ws.merge_cells(start_row = gap+i, start_column = 3, end_row = gap+i, end_column = 4)
-                ws.cell(row = gap+i, column = 1, value = str(i+1))
-                ws.cell(row = gap+i, column = 2, value = rolls[i]).fill = fill_roll
-                ws.cell(row = gap+i, column = 3, value = names[i]).fill = fill_name
+    today = todays_date()
+    first_day = date(today.year, today.month, 1)
+    days_in_month = monthrange(today.year, today.month)[1]
+    for i in range(days_in_month):
+        dt = first_day + timedelta(days=i)
+        ws.cell(row=3, column=DATE_COLUMN + i, value=dt).fill = FILL_DATE
 
-                cellrange = 'A'+str(gap+i)+':AN'+str(gap+i)
-                set_border(ws, cellrange)
-        today = todays_date()
-        first_day = date(today.year, today.month, 1)
-        days_in_month = monthrange(today.year, today.month)[1]
-        for i in range(days_in_month):
-                dt = first_day + timedelta(days = i)
-                ws.cell(row = 3, column = date_column+i, value = dt).fill = fill_date
-
-        first_date_column = get_column_letter(date_column)
-        last_date_column = get_column_letter(date_column+days_in_month-1)
-        sum_cell_column= date_column+days_in_month+1
-        ws.cell(row = 3, column = sum_cell_column, value = "Total").fill = fill_total
-        for i in range(NUMBER_OF_STUDENTS):
-                ws.cell(row = gap+i, column = sum_cell_column,
-                        value = "=SUM("+first_date_column+str(gap+i)+":"+last_date_column+str(gap+i)+")").fill = fill_total
+    first_date_column = get_column_letter(DATE_COLUMN)
+    last_date_column = get_column_letter(DATE_COLUMN + days_in_month - 1)
+    sum_cell_column = DATE_COLUMN + days_in_month + 1
+    ws.cell(row=3, column=sum_cell_column, value="Total").fill = FILL_TOTAL
+    for i in range(NUMBER_OF_STUDENTS):
+        ws.cell(row=GAP + i, column=sum_cell_column,
+                value="=SUM(" + first_date_column + str(GAP + i) + ":" + last_date_column + str(
+                    GAP + i) + ")").fill = FILL_TOTAL
 
 
 def mark_absent(wb, studs_absent, class_name):
-	ws = wb[month()]
-	col = todays_date().day + date_column - 1
-	for i in range(NUMBER_OF_STUDENTS):
-		if ws.cell(row = gap+i, column = 2).value in studs_absent:
-			ws.cell(row = gap+i, column = col, value = 0).fill = fill_absent
-	wb.save(make_file_name(class_name))
+    ws = wb[month()]
+    col = todays_date().day + DATE_COLUMN - 1
+    for i in range(NUMBER_OF_STUDENTS):
+        if ws.cell(row=GAP + i, column=2).value in studs_absent:
+            ws.cell(row=GAP + i, column=col, value=0).fill = FILL_ABSENT
+    wb.save(make_file_name(class_name))
 
 
 def mark_present(wb, studs_present, class_name):
-	ws = wb[month()]
-	col = todays_date().day + date_column - 1
-	for i in range(NUMBER_OF_STUDENTS):
-		if ws.cell(row = gap+i, column = 2).value in studs_present:
-			ws.cell(row = gap+i, column = col, value = 1).fill = fill_present
-	wb.save(make_file_name(class_name))
+    ws = wb[month()]
+    col = todays_date().day + DATE_COLUMN - 1
+    for i in range(NUMBER_OF_STUDENTS):
+        if ws.cell(row=GAP + i, column=2).value in studs_present:
+            ws.cell(row=GAP + i, column=col, value=1).fill = FILL_PRESENT
+    wb.save(make_file_name(class_name))
+
 
 def attendance_workbook(class_name):
     sl = StudentsList(class_name)
     tupl = sl.load_pkl_file()
-    global names, rolls, NUMBER_OF_STUDENTS
-    names = tupl[0]
-    rolls = tupl[1]
-    NUMBER_OF_STUDENTS = len(names)
-    #Current length of names is len(names)
+    global NAMES, ROLLS, NUMBER_OF_STUDENTS
+    NAMES = tupl[0]
+    ROLLS = tupl[1]
+    NUMBER_OF_STUDENTS = len(NAMES)
+    # Current length of NAMES is len(NAMES)
     filename = make_file_name(class_name)
     try:
         wb = load_workbook(filename)
@@ -152,4 +159,4 @@ def attendance_workbook(class_name):
 
 
 if __name__ == '__main__':
-        pass
+    pass
