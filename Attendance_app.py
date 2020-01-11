@@ -3,7 +3,7 @@ import sys
 import subprocess
 from datetime import datetime
 import tkinter as tk
-from tkinter import *
+from tkinter import messagebox, END
 from tkinter import font as tkfont
 from calendar import monthrange
 
@@ -136,7 +136,7 @@ class SampleApp(tk.Tk):
                 frame = self.frames['CreateNewBatchPage']
             frame.tkraise()
         else:
-            tk.messagebox.showerror('Error', 'Incorrect Credentials !!')
+            messagebox.showerror('Error', 'Incorrect Credentials !!')
 
 
 class StartPage(tk.Frame):
@@ -319,11 +319,11 @@ class CreateNewBatchPage(tk.Frame):
 
         batchexists = os.path.exists(os.path.join(os.getcwd(), 'extras', class_name))
         if batchexists:
-            tk.messagebox.showerror('Error', 'This batch name already exists')
+            messagebox.showerror('Error', 'This batch name already exists')
             return
 
         if number_of_studs < 1 or number_of_studs > 99:
-            tk.messagebox.showerror('Error', "Number of students not in allowed range!")
+            messagebox.showerror('Error', "Number of students not in allowed range!")
             return
 
         images_dir = os.path.join(os.getcwd(), 'images', class_name)
@@ -356,8 +356,8 @@ class CreateNewBatchPage(tk.Frame):
         os.makedirs(atten_reg_dir)
         wb = excel.attendance_workbook(class_name)
 
-        tk.messagebox.showinfo("Batch Successfully Created",
-                               "All the necessary Directories and Files created \nfor Batch-Code {}".format(class_name))
+        messagebox.showinfo("Batch Successfully Created",
+                            "All the necessary Directories and Files created \nfor Batch-Code {}".format(class_name))
         class_codes.add(class_name)
         self.tv_class.delete(0, END)
         self.tv_number.delete(0, END)
