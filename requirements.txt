@@ -1,0 +1,4 @@
+openpyxl
+pillow
+pyautogui
+OpenCV-contrib-python
