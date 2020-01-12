@@ -41,10 +41,9 @@ Windows users can download from [here](https://www.python.org/downloads/), Linux
 >Windows users can add python and pip to PATH (Linux users can use `sudo apt-get install pip3`)
 
 **Install Modules**
- 1. `pip install openpyxl`
- 2. `pip install pillow`
- 3. `pip install pyautogui`
- 4. `pip install OpenCV-contrib-python`
+<br>
+Install all the dependencies using the following command: <br>
+`pip install -r requirements.txt`
 
 ##  How to run the app
  - run the Attendance_app.py to launch the software
