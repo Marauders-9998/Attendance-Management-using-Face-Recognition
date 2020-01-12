@@ -1,25 +1,25 @@
-import excel
 import os
-import cv2
 import sys
 import pyautogui
 import subprocess
+from datetime import datetime
+import tkinter as tk
+from tkinter import END
+from tkinter import font as tkfont
+from calendar import monthrange
+
+import cv2
+from openpyxl import Workbook, load_workbook
+import excel
 from capture import capture
 from capture import detect_faces
-from datetime import datetime
-from calendar import monthrange
-from openpyxl import Workbook, load_workbook
 from face_train import FaceTrain
 from students_list import StudentsList
-import tkinter as tk
-from tkinter import *
 from main_file import MainFile
-from tkinter import font as tkfont
 
 class_codes = ['Marauders']
 manager_id = 'ADMIN'
 manager_pass = 'ubuntu'
-
 
 current_class = 'Marauders'
 if current_class != 'Marauders':
