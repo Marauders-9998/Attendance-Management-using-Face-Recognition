@@ -151,8 +151,7 @@ class SampleApp(tk.Tk):
             elif current_class == 'Marauders' and (
                     page_name == 'StudentPanelPage'):
                 messagebox.showerror('Error',
-                                        'Only Manager Panel is valid '
-                                        'for this class-code')
+                                     'Only Manager Panel is valid for this class-code')
                 return
             else:
                 frame = self.frames['CreateNewBatchPage']
@@ -212,17 +211,23 @@ class StartPage(tk.Frame):
         self.button1 = tk.Button(
             self, bg="#45056e", fg=self.text_color,
             text="Go to\nStudent Portal", width=bt_width, height=3,
-            font=("", 15), command=lambda: self.doWork(
-                         "StudentPanelPage", self.tv_class.get(),
-                         self.tv_username.get(),
-                         self.tv_pass.get()))
-        self.button2 = tk.Button(self, bg="#5f1854", fg=self.text_color,
-                                 text="Go to\nManager Portal",
-                                 width=bt_width, height=3, font=("", 15),
-                                 command=lambda: self.doWork(
-                                     "ManagerPanelPage", self.tv_class.get(),
-                                     self.tv_username.get(),
-                                     self.tv_pass.get()))
+            font=("", 15),
+            command=lambda: self.doWork(
+                "StudentPanelPage",
+                self.tv_class.get(),
+                self.tv_username.get(),
+                self.tv_pass.get()
+            ))
+        self.button2 = tk.Button(
+            self, bg="#5f1854", fg=self.text_color,
+            text="Go to\nManager Portal",
+            width=bt_width, height=3, font=("", 15),
+            command=lambda: self.doWork(
+                "ManagerPanelPage",
+                self.tv_class.get(),
+                self.tv_username.get(),
+                self.tv_pass.get()
+            ))
         self.button1.place(x=140 * scale_factor, y=340 * scale_factor)
         self.button2.place(x=410 * scale_factor, y=340 * scale_factor)
         self.bt_exit = tk.Button(self, bg="red", fg="yellow", text="Exit",
@@ -352,12 +357,11 @@ class ManagerPanelPage(tk.Frame):
             number_of_classes = ws['A1'].value
             if number_of_classes == 0:
                 messagebox.showerror('Error',
-                                        'No class in the database yet')
+                                     'No class in the database yet')
                 return
             else:
                 messagebox.showerror('Error',
-                                        'Please login again '
-                                        'with a valid class-code')
+                                     'Please login again with a valid class-code')
                 current_class = ws['A2'].value
                 return
 
@@ -441,7 +445,7 @@ class CreateNewBatchPage(tk.Frame):
 
         if number_of_studs < 1 or number_of_studs > 99:
             messagebox.showerror('Error',
-                                    "Number of students not in allowed range!")
+                                 "Number of students not in allowed range!")
             return
 
         images_dir = os.path.join(os.getcwd(), 'images', class_name)
@@ -477,9 +481,8 @@ class CreateNewBatchPage(tk.Frame):
         wb = excel.attendance_workbook(class_name)
 
         messagebox.showinfo("Batch Successfully Created",
-                               "All the necessary Directories "
-                               "and Files created "
-                               "\nfor Batch-Code {}".format(class_name))
+                            "All the necessary Directories and Files created\n"
+                            f"for Batch-Code {class_name}")
         class_codes.add(class_name)
         self.tv_class.delete(0, END)
         self.tv_number.delete(0, END)
@@ -538,7 +541,7 @@ class AddStudentPage(tk.Frame):
         currently_studs = ws['A1'].value
         if currently_studs == total_studs:
             messagebox.showinfo("Batch Full",
-                                   "No more accomodation for any new student")
+                                "No more accomodation for any new student")
             return
         ws['A1'] = currently_studs + 1
         row_here = currently_studs + 2
@@ -588,10 +591,9 @@ class AddStudentPage(tk.Frame):
         image_dir = os.path.join(os.getcwd(), 'images', current_class,
                                  's' + roll_no)
         messagebox.showinfo('Student Added',
-                               student_name + " admitted!\nClick OK "
-                               "to proceed for capturing training "
-                               "images. Make sure that your "
-                               "surroundings are well lit")
+                            f"{student_name} admitted!\n"
+                            "Click OK to proceed for capturing training images. "
+                            "Make sure that your surroundings are well lit")
         i = 5
         face_detected_right = False
         xml_file = os.path.join(os.getcwd(),
@@ -609,10 +611,9 @@ class AddStudentPage(tk.Frame):
             i = i - 1
         if i == 0:
             messagebox.showinfo("Message",
-                                   "Training images added successfully!")
+                                "Training images added successfully!")
         messagebox.showinfo('Enrollment Number',
-                               'Roll Number of student: ' +
-                               current_class + roll_no)
+                            f'Roll Number of student: {current_class + roll_no}')
         self.tv_name.delete(0, END)
 
     def exit(self):
