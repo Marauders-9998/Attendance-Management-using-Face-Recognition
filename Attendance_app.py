@@ -1,14 +1,14 @@
 import os
 import sys
-import pyautogui
 import subprocess
 from datetime import datetime
 import tkinter as tk
-from tkinter import END
+from tkinter import messagebox, END
 from tkinter import font as tkfont
 from calendar import monthrange
 
 import cv2
+import pyautogui
 from openpyxl import Workbook, load_workbook
 import excel
 from capture import capture
@@ -29,10 +29,11 @@ else:
     current_class_obj = None
     FaceTrainObj = None
 
-"""Dynamic variables"""
+# Dynamic variables
 normal_width = 1920
 normal_height = 1080
-x, y = pyautogui.size()
+#x, y = pyautogui.size()
+x,y = 1366, 768
 
 percentage_width = x/(normal_width/100)
 percentage_height = y/(normal_height/100)
@@ -40,13 +41,11 @@ scale_factor = ((percentage_width + percentage_height)/2)/100
 
 title_fontsize = int(30 * scale_factor)
 minimum_size = 24
-if title_fontsize < minimum_size:
-    title_fontsize = minimum_size
+title_fontsize = max(title_fontsize, minimum_size)
 
 text_fontsize = int(18 * scale_factor)
 minimum_textsize = 13
-if text_fontsize < minimum_textsize:
-    text_fontsize = minimum_textsize
+text_fontsize = max(minimum_textsize, text_fontsize)
 
 
 class SampleApp(tk.Tk):
@@ -56,7 +55,7 @@ class SampleApp(tk.Tk):
 
         self.title_font = tkfont.Font(family='Helvetica', size=18,
                                       weight="bold", slant="italic")
-        geo = str(int(0.43 * x)) + 'x' + str(int(0.50 * y))
+        geo = str(int(0.43 * x)) + 'x' + str(int(0.52 * y))
         self.geometry(geo)
         self.resizable(False, False)
         self.title('Attendance Management App')
@@ -152,7 +151,7 @@ class SampleApp(tk.Tk):
                     current_class_obj = MainFile(current_class)
             elif current_class == 'Marauders' and (
                     page_name == 'StudentPanelPage'):
-                tk.messagebox.showerror('Error',
+                messagebox.showerror('Error',
                                         'Only Manager Panel is valid '
                                         'for this class-code')
                 return
@@ -160,7 +159,7 @@ class SampleApp(tk.Tk):
                 frame = self.frames['CreateNewBatchPage']
             frame.tkraise()
         else:
-            tk.messagebox.showerror('Error', 'Incorrect Credentials !!')
+            messagebox.showerror('Error', 'Incorrect Credentials !!')
 
 
 class StartPage(tk.Frame):
@@ -174,8 +173,7 @@ class StartPage(tk.Frame):
 
         entry_width = int(30 * scale_factor)
         min_entrywidth = 25
-        if entry_width < min_entrywidth:
-            entry_width = min_entrywidth
+        entry_width = max(entry_width, min_entrywidth)
         self.label = tk.Label(self, width=25, text="Attendance Management",
                               bg=self.bkg, fg="#F8E9A1",
                               font=("Times", title_fontsize))
@@ -211,12 +209,11 @@ class StartPage(tk.Frame):
 
         bt_width = int(16 * scale_factor)
         min_width = 12
-        if bt_width < min_width:
-            bt_width = min_width
+        bt_width = max(min_width, bt_width)
         self.button1 = tk.Button(
-                     self, bg="#45056e", fg=self.text_color,
-                     text="Go to\nStudent Portal", width=bt_width, height=3,
-                     font=("", 15), command=lambda: self.doWork(
+            self, bg="#45056e", fg=self.text_color,
+            text="Go to\nStudent Portal", width=bt_width, height=3,
+            font=("", 15), command=lambda: self.doWork(
                          "StudentPanelPage", self.tv_class.get(),
                          self.tv_username.get(),
                          self.tv_pass.get()))
@@ -304,12 +301,10 @@ class ManagerPanelPage(tk.Frame):
 
         bt_ht = int(5 * scale_factor)
         min_ht = 3
-        if bt_ht < min_ht:
-            bt_ht = min_ht
+        bt_ht = max(min_ht, bt_ht)
         bt_width = int(15 * scale_factor)
         min_width = 12
-        if bt_width < min_width:
-            bt_width = min_width
+        bt_width = max(min_width, bt_width)
         bt_train = tk.Button(self, text="Train the\n Recogniser",
                              bg="#45056e", fg=self.text_color, width=bt_width,
                              height=bt_ht, font=("", 15), command=self.doWork)
@@ -357,11 +352,11 @@ class ManagerPanelPage(tk.Frame):
             ws = wb.active
             number_of_classes = ws['A1'].value
             if number_of_classes == 0:
-                tk.messagebox.showerror('Error',
+                messagebox.showerror('Error',
                                         'No class in the database yet')
                 return
             else:
-                tk.messagebox.showerror('Error',
+                messagebox.showerror('Error',
                                         'Please login again '
                                         'with a valid class-code')
                 current_class = ws['A2'].value
@@ -390,8 +385,7 @@ class CreateNewBatchPage(tk.Frame):
 
         entry_width = int(30 * scale_factor)
         min_entrywidth = 23
-        if entry_width < min_entrywidth:
-            entry_width = min_entrywidth
+        entry_width = max(min_entrywidth, entry_width)
         self.lb_class = tk.Label(self, text="CLASS-CODE: ", bg=self.bkg,
                                  fg=self.text_color,
                                  font=("Courier", text_fontsize))
@@ -443,11 +437,11 @@ class CreateNewBatchPage(tk.Frame):
         batchexists = os.path.exists(os.path.join(os.getcwd(), 'extras',
                                                   class_name))
         if batchexists:
-            tk.messagebox.showerror('Error', 'This batch name already exists')
+            messagebox.showerror('Error', 'This batch name already exists')
             return
 
         if number_of_studs < 1 or number_of_studs > 99:
-            tk.messagebox.showerror('Error',
+            messagebox.showerror('Error',
                                     "Number of students not in allowed range!")
             return
 
@@ -483,7 +477,7 @@ class CreateNewBatchPage(tk.Frame):
         os.makedirs(atten_reg_dir)
         wb = excel.attendance_workbook(class_name)
 
-        tk.messagebox.showinfo("Batch Successfully Created",
+        messagebox.showinfo("Batch Successfully Created",
                                "All the necessary Directories "
                                "and Files created "
                                "\nfor Batch-Code {}".format(class_name))
@@ -514,8 +508,7 @@ class AddStudentPage(tk.Frame):
         self.lb_name.place(x=285 * scale_factor, y=175 * scale_factor)
         entry_width = int(30 * scale_factor)
         min_entrywidth = 23
-        if entry_width < min_entrywidth:
-            entry_width = min_entrywidth
+        entry_width = max(min_entrywidth, entry_width)
         self.tv_name = tk.Entry(self, width=entry_width, justify='center',
                                 font=("", 16))
         self.tv_name.focus()
@@ -545,7 +538,7 @@ class AddStudentPage(tk.Frame):
         total_studs = ws['B1'].value
         currently_studs = ws['A1'].value
         if currently_studs == total_studs:
-            tk.messagebox.showinfo("Batch Full",
+            messagebox.showinfo("Batch Full",
                                    "No more accomodation for any new student")
             return
         ws['A1'] = currently_studs + 1
@@ -583,7 +576,7 @@ class AddStudentPage(tk.Frame):
             first_date_column = excel.get_column_letter(excel.date_column)
             days_in_month = monthrange(today.year, today.month)[1]
             last_date_column = excel.get_column_letter(
-                             excel.date_column + days_in_month - 1)
+                excel.date_column + days_in_month - 1)
             sum_cell_column = excel.date_column+days_in_month + 1
             fill_total = excel.PatternFill(fgColor='25F741', fill_type='solid')
             ws.cell(row=row_here, column=sum_cell_column,
@@ -595,7 +588,7 @@ class AddStudentPage(tk.Frame):
 
         image_dir = os.path.join(os.getcwd(), 'images', current_class,
                                  's' + roll_no)
-        tk.messagebox.showinfo('Student Added',
+        messagebox.showinfo('Student Added',
                                student_name + " admitted!\nClick OK "
                                "to proceed for capturing training "
                                "images. Make sure that your "
@@ -616,9 +609,9 @@ class AddStudentPage(tk.Frame):
             face_detected_right = False
             i = i - 1
         if i == 0:
-            tk.messagebox.showinfo("Message",
+            messagebox.showinfo("Message",
                                    "Training images added successfully!")
-        tk.messagebox.showinfo('Enrollment Number',
+        messagebox.showinfo('Enrollment Number',
                                'Roll Number of student: ' +
                                current_class + roll_no)
         self.tv_name.delete(0, END)
