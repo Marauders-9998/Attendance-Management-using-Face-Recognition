@@ -32,8 +32,7 @@ else:
 # Dynamic variables
 normal_width = 1920
 normal_height = 1080
-#x, y = pyautogui.size()
-x,y = 1366, 768
+x, y = pyautogui.size()
 
 percentage_width = x/(normal_width/100)
 percentage_height = y/(normal_height/100)
