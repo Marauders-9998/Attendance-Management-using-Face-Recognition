@@ -330,8 +330,7 @@ class ManagerPanelPage(tk.Frame):
 
     def viewRegister(self):
         global current_class
-        atten_register = os.path.join(os.getcwd(), 'extras', current_class,
-                                      current_class + '.xlsx')
+        atten_register = os.path.join(os.getcwd(), 'extras', current_class, f'{current_class}.xlsx')
         try:
             opener = 'open' if sys.platform == 'darwin' else 'xdg-open'
             subprocess.call([opener, atten_register])
@@ -395,8 +394,7 @@ class CreateNewBatchPage(tk.Frame):
                                   font=("Courier", text_fontsize))
         self.lb_number.place(x=265 * scale_factor, y=240 * scale_factor)
         vcmd = (self.controller.register(self.validate_number_field),
-                '%d', '%i', '%P', '%s', '%S', '%v',
-                '%V', '%W')
+                '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
         self.tv_number = tk.Entry(self, width=entry_width, font=("", 16),
                                   justify='center', validate='key',
                                   validatecommand=vcmd)
@@ -470,7 +468,7 @@ class CreateNewBatchPage(tk.Frame):
         wb = excel.attendance_workbook(class_name)
 
         messagebox.showinfo("Batch Successfully Created",
-                            "All the necessary Directories and Files created\n"
+                            "All the necessary Directories and Files created"
                             f"for Batch-Code {class_name}")
         class_codes.add(class_name)
         self.tv_class.delete(0, END)
@@ -528,8 +526,7 @@ class AddStudentPage(tk.Frame):
         total_studs = ws['B1'].value
         currently_studs = ws['A1'].value
         if currently_studs == total_studs:
-            messagebox.showinfo("Batch Full",
-                                "No more accomodation for any new student")
+            messagebox.showinfo("Batch Full", "No more accomodation for any new student")
             return
         ws['A1'] = currently_studs + 1
         row_here = currently_studs + 2
