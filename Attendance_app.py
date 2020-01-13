@@ -137,10 +137,8 @@ class SampleApp(tk.Tk):
             current_class = c_code
             print("current class", current_class)
             if current_class != 'Marauders':
-                # frame.lb_class_code.config(
-                # text="Batch Code : {}".format(current_class))
-                # frame.lb_class_code['text']="Batch "
-                # "Code : {}".format(current_class)
+                # frame.lb_class_code.config(text="Batch Code : {}".format(current_class))
+                # frame.lb_class_code['text']="Batch Code : {}".format(current_class)
                 StudentsList(current_class).make_pkl_file()
                 if page_name == "ManagerPanelPage":
                     global FaceTrainObj
@@ -148,10 +146,8 @@ class SampleApp(tk.Tk):
                 elif page_name == "StudentPanelPage":
                     global current_class_obj
                     current_class_obj = MainFile(current_class)
-            elif current_class == 'Marauders' and (
-                    page_name == 'StudentPanelPage'):
-                messagebox.showerror('Error',
-                                     'Only Manager Panel is valid for this class-code')
+            elif current_class == 'Marauders' and page_name == 'StudentPanelPage':
+                messagebox.showerror('Error', 'Only Manager Panel is valid for this class-code')
                 return
             else:
                 frame = self.frames['CreateNewBatchPage']
@@ -344,24 +340,20 @@ class ManagerPanelPage(tk.Frame):
 
     def addStudent(self):
         global current_class
-        students_list_file = os.path.join(os.getcwd(), "student's list",
-                                          current_class + '.xlsx')
+        students_list_file = os.path.join(os.getcwd(), "student's list", f'{current_class}.xlsx')
         self.controller.show_frame("AddStudentPage")
 
     def doWork(self):
         global FaceTrainObj, current_class
         if current_class == 'Marauders':
-            wb = load_workbook(os.path.join(os.getcwd(), 'extras',
-                                            'classes.xlsx'))
+            wb = load_workbook(os.path.join(os.getcwd(), 'extras', 'classes.xlsx'))
             ws = wb.active
             number_of_classes = ws['A1'].value
             if number_of_classes == 0:
-                messagebox.showerror('Error',
-                                     'No class in the database yet')
+                messagebox.showerror('Error', 'No class in the database yet')
                 return
             else:
-                messagebox.showerror('Error',
-                                     'Please login again with a valid class-code')
+                messagebox.showerror('Error', 'Please login again with a valid class-code')
                 current_class = ws['A2'].value
                 return
 
@@ -437,15 +429,13 @@ class CreateNewBatchPage(tk.Frame):
         class_name = self.tv_class.get()
         number_of_studs = int(self.tv_number.get())
 
-        batchexists = os.path.exists(os.path.join(os.getcwd(), 'extras',
-                                                  class_name))
+        batchexists = os.path.exists(os.path.join(os.getcwd(), 'extras', class_name))
         if batchexists:
             messagebox.showerror('Error', 'This batch name already exists')
             return
 
         if number_of_studs < 1 or number_of_studs > 99:
-            messagebox.showerror('Error',
-                                 "Number of students not in allowed range!")
+            messagebox.showerror('Error', "Number of students not in allowed range!")
             return
 
         images_dir = os.path.join(os.getcwd(), 'images', class_name)
@@ -456,8 +446,7 @@ class CreateNewBatchPage(tk.Frame):
         for i in range(number_of_studs):
             os.makedirs(os.path.join(images_dir, 's' + str(i).zfill(2)))
 
-        studs_list_file = os.path.join(os.getcwd(), "student's list",
-                                       class_name+'.xlsx')
+        studs_list_file = os.path.join(os.getcwd(), "student's list", f'{class_name}.xlsx')
         wb = Workbook()
         wb.guess_types = True
         ws = wb.active
@@ -533,8 +522,7 @@ class AddStudentPage(tk.Frame):
     def doWork(self):
         global current_class
 
-        students_list_file = os.path.join(os.getcwd(), "student's list",
-                                          current_class + '.xlsx')
+        students_list_file = os.path.join(os.getcwd(), "student's list", f'{current_class}.xlsx')
         wb = load_workbook(students_list_file)
         ws = wb.active
         total_studs = ws['B1'].value
@@ -555,8 +543,7 @@ class AddStudentPage(tk.Frame):
         sl = StudentsList(current_class)
         sl.make_pkl_file()
 
-        atten_reg = os.path.join(os.getcwd(), 'extras', current_class,
-                                 current_class+'.xlsx')
+        atten_reg = os.path.join(os.getcwd(), 'extras', current_class, f'{current_class}.xlsx')
         wb = load_workbook(atten_reg)
         today = datetime.now().date()
         month = today.strftime('%B')
@@ -577,9 +564,8 @@ class AddStudentPage(tk.Frame):
             excel.set_border(ws, cellrange)
             first_date_column = excel.get_column_letter(excel.date_column)
             days_in_month = monthrange(today.year, today.month)[1]
-            last_date_column = excel.get_column_letter(
-                excel.date_column + days_in_month - 1)
-            sum_cell_column = excel.date_column+days_in_month + 1
+            last_date_column = excel.get_column_letter(excel.date_column + days_in_month - 1)
+            sum_cell_column = excel.date_column + days_in_month + 1
             fill_total = excel.PatternFill(fgColor='25F741', fill_type='solid')
             ws.cell(row=row_here, column=sum_cell_column,
                     value="=SUM(" + first_date_column + str(row_here) + ":" +
@@ -588,30 +574,29 @@ class AddStudentPage(tk.Frame):
         except:  # If current month does not exist
             wb = excel.attendance_workbook(current_class)
 
-        image_dir = os.path.join(os.getcwd(), 'images', current_class,
-                                 's' + roll_no)
+        image_dir = os.path.join(os.getcwd(), 'images', current_class, 's' + roll_no)
         messagebox.showinfo('Student Added',
                             f"{student_name} admitted!\n"
                             "Click OK to proceed for capturing training images. "
                             "Make sure that your surroundings are well lit")
         i = 5
         face_detected_right = False
-        xml_file = os.path.join(os.getcwd(),
-                                'haarcascade_frontalface_default.xml')
+        xml_file = os.path.join(os.getcwd(), 'haarcascade_frontalface_default.xml')
         while i > 0:
             while face_detected_right is False:
                 img_path, frame = capture()
                 face_detected_right = detect_faces(xml_file, frame)
-            img_path = os.path.join(os.getcwd(), 'images', current_class,
-                                    "s"+str(roll_no).zfill(2),
-                                    os.path.basename(img_path))
+            img_path = os.path.join(
+                os.getcwd(), 'images', current_class,
+                "s"+str(roll_no).zfill(2),
+                os.path.basename(img_path)
+            )
             cv2.imwrite(img_path, frame)
             cv2.destroyAllWindows()
             face_detected_right = False
             i = i - 1
         if i == 0:
-            messagebox.showinfo("Message",
-                                "Training images added successfully!")
+            messagebox.showinfo("Message", "Training images added successfully!")
         messagebox.showinfo('Enrollment Number',
                             f'Roll Number of student: {current_class + roll_no}')
         self.tv_name.delete(0, END)
