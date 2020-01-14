@@ -1,0 +1,15 @@
+et-xmlfile==1.0.1
+jdcal==1.4.1
+MouseInfo==0.1.2
+numpy==1.18.1
+opencv-contrib-python==4.1.2.30
+openpyxl==3.0.3
+Pillow==7.0.0
+PyAutoGUI==0.9.48
+PyGetWindow==0.0.8
+PyMsgBox==1.0.7
+pyperclip==1.7.0
+PyRect==0.1.4
+PyScreeze==0.1.26
+python3-xlib==0.15
+PyTweening==1.0.3
