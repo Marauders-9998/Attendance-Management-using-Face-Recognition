@@ -41,10 +41,11 @@ Windows users can download from [here](https://www.python.org/downloads/), Linux
 >Windows users can add python and pip to PATH (Linux users can use `sudo apt-get install pip3`)
 
 **Install Modules**
- 1. `pip install openpyxl`
- 2. `pip install pillow`
- 3. `pip install pyautogui`
- 4. `pip install OpenCV-contrib-python`
+ 1. `pip install openpyxl` (https://openpyxl.readthedocs.io/en/stable/)
+ 2. `pip install pillow` (https://pillow.readthedocs.io/en/stable/)
+ 3. `pip install pyautogui` (https://pyautogui.readthedocs.org/)
+ 4. `pip install OpenCV-contrib-python`(https://opencv-python-tutroals.readthedocs.io/en/latest/)
+ 5. `sudo apt-get install python-tk`(https://docs.python.org/3/library/tkinter.html)
 
 ##  How to run the app
  - run the Attendance_app.py to launch the software
