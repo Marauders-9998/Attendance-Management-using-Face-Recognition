@@ -1,4 +1,4 @@
-openpyxl
-pillow
-pyautogui
-OpenCV-contrib-python
+openpyxl==3.0.0
+pillow==5.4.1
+pyautogui==0.9.48
+OpenCV-contrib-python==4.1.1.26
