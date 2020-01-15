@@ -11,11 +11,15 @@ names = []
 rolls = []
 
 class StudentsList:
+    """
+        
+    """
     def __init__(self, class_name):
-        """ :param str class_name: name of the class """
+        """ :param str class_name: name of the physical class of a student"""
         self.class_name = class_name
 
     def make_pkl_file(self):
+        """ Create a Pickle(.pkl) file"""
         pkl_file_path=Path(self.make_pkl_name())
         if pkl_file_path.exists():
             os.remove(pkl_file_path)
@@ -32,14 +36,22 @@ class StudentsList:
             pickle.dump(tupl, f, protocol = pickle.HIGHEST_PROTOCOL)
 
     def load_pkl_file(self):
+        """ Reads and returns the Pickle(.pkl) file containing data of the
+            physical class.
+        """
         with open(self.make_pkl_name(), 'rb') as f:
             return pickle.load(f)
 
     def make_xl_name(self):
-        """ Return the complete path of the Excel file containing the class data"""
+        """ Returns the complete pathname of the Excel(.xlsx) file containing
+            data of the  physical class.
+        """
         return join(getcwd(), "student's list", self.class_name + '.xlsx')
     
     def make_pkl_name(self):
+        """ Returns the complete pathname of the Pickle(.pkl) file containing
+            data of the physical class.
+        """
         return join(getcwd(), "student's list", self.class_name + '.pkl')
 
 
