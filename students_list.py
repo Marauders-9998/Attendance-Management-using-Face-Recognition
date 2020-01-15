@@ -11,8 +11,15 @@ names = []
 rolls = []
 
 class StudentsList:
-    """
-        
+    """ Stores the details of all students in a physical class
+
+        Attributes:
+            class_name: A string that contains the name of the physical class
+            
+        Class variables:
+            names: A list that contains the name of all students.
+            rolls: A list that contains the roll number of all students.
+
     """
     def __init__(self, class_name):
         """ :param str class_name: name of the physical class of a student"""
