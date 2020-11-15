@@ -33,7 +33,6 @@ Captured photo after marking attendance automatically gets added to training dat
 ./images - contains the training data images and unrecognized student's directory
 <br/>
 ./student's list - contains the files containing the information of all students of a class
-```
 
 ## Usage
 ```bash
