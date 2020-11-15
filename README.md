@@ -1,4 +1,3 @@
-
 # [Attendance-Management-using-Face-Recognition](https://github.com/Marauders-9998/Attendance-Management-using-Face-Recognition)
 
 
@@ -35,25 +34,15 @@ Captured photo after marking attendance automatically gets added to training dat
 <br/>
 ./student's list - contains the files containing the information of all students of a class
 
-## Setup for the app
-Python3 should be installed on the system.
-Windows users can download from [here](https://www.python.org/downloads/), Linux users will most probably have python3 already installed or it can be done manually using `sudo apt-get install python3.6`
->Windows users can add python and pip to PATH (Linux users can use `sudo apt-get install pip3`)
-
-**Install Modules**
- 1. `pip install openpyxl`
- 2. `pip install pillow`
- 3. `pip install pyautogui`
- 4. `pip install OpenCV-contrib-python`
-
-##  How to run the app
- - run the Attendance_app.py to launch the software
- - use 'Marauders' as class-code to add classes to the software
+## Usage
+```bash
+python Attendance_app.py
+```
+ - use **'Marauders'** as class-code to add classes to the software
  - browse the Manager and Student's Panel using class code of the batch you want to enter with
- - the username is 'ADMIN' and password 'ubuntu'
- - use `SPACE` to click images wherever needed
- - you can add more images to the training data manually
-
+ - the username is **'ADMIN'** and password **'ubuntu'**
+ - use `SPACE-bar` to click images wherever needed
+ - you can add more images to the training data manually as well
 
 ## Contribution
 
