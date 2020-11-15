@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "attendance-management-using-face-recognition"
+version = "1.0.0"
+description = "A desktop app to manage attendance management system of an institute through facial recognition with Excel-files based Database."
+authors = ["Marauders <vibhu4agarwal@gmail.com>"]
+license = "GPL"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+openpyxl = "^3.0.5"
+Pillow = "^8.0.1"
+PyAutoGUI = "^0.9.52"
+opencv-contrib-python = "^4.4.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
