@@ -11,19 +11,17 @@ This python based app uses OpenCV libraries: face detection using Haar feature-b
 
 ## About the app
 The app has two main Panels: Students' and Manager's
-<br/>
-![image description](https://lh3.googleusercontent.com/k8wLf41-IzIm5AiUo8G44IrBsLKKKtzKUqnoNiOGEo7KHox6ky9YpiaZbBplw0lLOYrHBiZLzMm8 "Welcome Page")
-<br/>
+
+<img src="app_images/HomePage.png" width="500" height="350">
+
 Students' panel has one main feature in marking the attendance
-<br/>
-![image description](https://lh3.googleusercontent.com/Sq2hEKvJoPdtKrsYNakuKoBOF10utSc6nLyiKfQnVCy9DWG511sLHcIAY9MjV-WVP4hP3Sz1cOTG "Student Panel Page")
-<br/>
+
+<img src="app_images/StudentPortal.png" width="500" height="350">
+
 Manager's panel has various features in adding a new class, adding a student to logged-in class, training the recognizer and viewing the attendance register
-<br/>
-![image description](https://lh3.googleusercontent.com/BQoRZ4yOKuiclxaVxreUeHHcSkekon_klQFP7HFB0BRFSSgMSdr_uV9jPcpCfa0QhnYzzpnn-ukh "Create a New Batch")
-<br/>
-![image description](https://lh3.googleusercontent.com/jK3Khh22Q1jehEnd6IDSnIq-jtYs3gjb15rvU-elyFAVb4cRTuVzIzvsY5e2N9xFjgSFvZ8oOe_H "Manager Panel Page")
-<br/>
+
+<img src="app_images/ManagerPortal.png" width="500" height="350">
+
 Captured photo after marking attendance automatically gets added to training data images. If the app somehow fails to recognize a student, the Manager can manually mark a student's attendance in attendance register by looking at the images in unrecognized students directory.
 <br/>
 **Directory Structure:**
