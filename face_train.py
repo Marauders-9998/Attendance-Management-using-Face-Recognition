@@ -6,10 +6,9 @@ import numpy as np
 
 
 class FaceTrain:
-
     def __init__(self, class_name):
         self.class_name = class_name
-        self.xml_file = os.path.join(os.getcwd(), 'haarcascade_frontalface_default.xml')
+        self.xml_file = os.path.join(os.getcwd(), "haarcascade_frontalface_default.xml")
 
     def face_detect(self, image):
         img = image.copy()
@@ -20,10 +19,10 @@ class FaceTrain:
             return None, None
         else:
             (x, y, w, h) = faces[0]
-            return gray[y:y + w, x:x + h], faces[0]
+            return gray[y: y + w, x: x + h], faces[0]
 
     def prepare_training_data(self):
-        training_data_dir = os.path.join(os.getcwd(), 'images', self.class_name)
+        training_data_dir = os.path.join(os.getcwd(), "images", self.class_name)
         dirs = os.listdir(training_data_dir)
         faces = []
         labels = []
@@ -33,13 +32,17 @@ class FaceTrain:
             try:
                 label = int(dir_name.replace("s", ""))
             except:
-                messagebox.showerror("Error",
-                                     "Unable to prepare training data for " + dir_name + "\nfolder in images directory does not follow the naming scheme")
+                messagebox.showerror(
+                    "Error",
+                    "Unable to prepare training data for "
+                    + dir_name
+                    + "\nfolder in images directory does not follow the naming scheme",
+                )
                 continue
             subject_dir_path = os.path.join(training_data_dir, dir_name)
             images = os.listdir(subject_dir_path)
             for image_name in images:
-                if image_name.startswith('.'):
+                if image_name.startswith("."):
                     continue
                 img = cv2.imread(os.path.join(subject_dir_path, image_name))
                 face, rect = self.face_detect(img)
@@ -60,11 +63,15 @@ class FaceTrain:
         face_recognizer = cv2.face.LBPHFaceRecognizer_create()
         face_recognizer.train(faces, np.array(labels))
 
-        face_recognizer_file = os.path.join(os.getcwd(), 'extras', self.class_name, 'face_recognizer_file.xml')
+        face_recognizer_file = os.path.join(
+            os.getcwd(), "extras", self.class_name, "face_recognizer_file.xml"
+        )
         face_recognizer.save(face_recognizer_file)
 
-        messagebox.showinfo("Training Successful", "Trained for {} images".format(len(faces)))
+        messagebox.showinfo(
+            "Training Successful", "Trained for {} images".format(len(faces))
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
