@@ -3,7 +3,7 @@ from datetime import datetime
 from tkinter import messagebox
 import cv2
 
-xml_file = os.path.join(os.getcwd(), 'haarcascade_frontalface_default.xml')
+xml_file = os.path.join(os.getcwd(), "haarcascade_frontalface_default.xml")
 
 
 def detect_faces(cascade_xml, bgr_img, scaleFactor=1.1):
@@ -17,7 +17,9 @@ def detect_faces(cascade_xml, bgr_img, scaleFactor=1.1):
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
     cv2.imshow("Training Image", img)
     cv2.waitKey(0)
-    response = messagebox.askyesno("Verify", "Has you face been properly detected and marked ?")
+    response = messagebox.askyesno(
+        "Verify", "Has you face been properly detected and marked ?"
+    )
 
     cv2.destroyAllWindows()
     return response
@@ -43,7 +45,7 @@ def capture():
         elif k % 256 == 32:
             # SPACE pressed
             img_name = str(datetime.now().strftime("%Y%m%d_%H%M%S"))
-            img_name = os.path.join(os.getcwd(), 'images', ".temp", img_name + '.jpg')
+            img_name = os.path.join(os.getcwd(), "images", ".temp", img_name + ".jpg")
             cv2.imwrite(img_name, frame)
             break
 
@@ -53,5 +55,5 @@ def capture():
     return img_name, frame
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
