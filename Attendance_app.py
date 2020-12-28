@@ -7,6 +7,8 @@ from tkinter import messagebox, END
 from tkinter import font as tkfont
 from calendar import monthrange
 
+from tkinter import *
+
 import cv2
 import pyautogui
 from openpyxl import Workbook, load_workbook
@@ -164,7 +166,10 @@ class SampleApp(tk.Tk):
 
 
 class StartPage(tk.Frame):
+    global class_codes
+
     def __init__(self, parent, controller):
+
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.bkg = "#222629"
@@ -192,9 +197,21 @@ class StartPage(tk.Frame):
             font=("Courier", text_fontsize),
         )
         self.lb_class.place(x=170 * scale_factor, y=155 * scale_factor)
-        self.tv_class = tk.Entry(self, width=entry_width)
-        self.tv_class.focus()
-        self.tv_class.place(x=340 * scale_factor, y=160 * scale_factor)
+
+        # Class Codes Autocompletion Stuff
+        self.filled = False
+
+        self.classCodes = list(class_codes)
+        self.class_variable = StringVar(self)
+        self.class_variable.set("")  # default value
+        self.tv_class = tk.Entry(self, textvariable=self.class_variable)
+
+        self.tv_class.focus_set()
+        self.tv_class.bind("<KeyRelease>", self.get_typed)
+        self.tv_class.bind("<Key>", self.filled)
+        self.tv_class.icursor("end")
+
+        self.tv_class.place(x=400 * scale_factor, y=160 * scale_factor)
 
         self.lb_username = tk.Label(
             self,
@@ -284,6 +301,31 @@ class StartPage(tk.Frame):
     def exit(self):
         self.controller.destroy()
         self.controller.quit()
+
+    # Autocompletion Helper Functions
+    def match_string(self):
+        hits = []
+        got = self.class_variable.get()
+        for item in self.classCodes:
+            if item.startswith(got):
+                hits.append(item)
+        return hits
+
+    def get_typed(self, event):
+        if len(event.keysym) == 1:
+            hits = self.match_string()
+            self.show_hit(hits)
+
+    def show_hit(self, lst):
+        if len(lst) == 1:
+            self.class_variable.set(lst[0])
+            self.filled = True
+
+    def detect_pressed(self, event):
+        self.key = event.keysym
+        if len(self.key) == 1 and self.filled is True:
+            pos = self.tv_class.index(tk.INSERT)
+            self.tv_class.delete(pos, tk.END)
 
 
 class StudentPanelPage(tk.Frame):
