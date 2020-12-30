@@ -9,7 +9,7 @@ This desktop application aims to simplify the process of Attendance Management o
 ## About the Project
 This python based app uses OpenCV libraries: face detection using Haar feature-based cascade classifier and face recognition using Local Binary Patterns Histograms (LBPH) and openpyxl library to manage excel sheet through python scripts. GUI features are implemented using tkinter library.
 
-<img src="logo/logo.png" width="500" height="350">
+<img src="projectlogo/logo.png" width="500" height="350">
 
 ## About the app
 The app has two main Panels: Students' and Manager's
