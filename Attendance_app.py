@@ -202,7 +202,9 @@ class StartPage(tk.Frame):
         self.class_codes = class_codes
         self.class_variable = StringVar(self)
         self.class_variable.set("")  # default value
-        self.tv_class = tk.Entry(self, textvariable=self.class_variable)
+        self.tv_class = tk.Entry(
+            self, textvariable=self.class_variable, width=entry_width
+        )
         self.tv_class.focus_set()
         self.tv_class.bind("<KeyRelease>", self.get_typed)
         self.tv_class.bind("<Key>", self.filled)
